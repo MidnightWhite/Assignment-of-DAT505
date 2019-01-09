@@ -23,6 +23,8 @@
 
 <script>
 
+//Global variables
+
 var SCREEN_WIDTH = window.innerWidth,
 SCREEN_HEIGHT = window.innerHeight,
 
@@ -38,7 +40,9 @@ init();
 animate();
 
 function init() {
+	// Create an empty scene --------------------------
 	scene = new THREE.Scene();
+	// Create a basic perspective camera --------------
 	camera = new THREE.PerspectiveCamera( 80, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 3000 );
 	camera.position.z = 400;
 
@@ -59,7 +63,7 @@ function init() {
 		backgroundScene .add(backgroundCamera );
 		backgroundScene .add(backgroundMesh );
 
-    //Light
+    // Create the lights
 
 		var ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
 		scene.add( ambientLight );
@@ -68,7 +72,7 @@ function init() {
 		camera.add( pointLight );
 		scene.add( camera );
 
-    //model
+    //Load a 3D model
 
 		function loadModel() {
 
@@ -91,7 +95,7 @@ function init() {
 
 		};
 
-
+  //Load texture
 		var textureLoader = new THREE.TextureLoader( manager );
 
 		var texture = textureLoader.load( 'model/UFO.jpg' );
@@ -109,7 +113,7 @@ function init() {
 
 		function onError() {}
 
-    //BGM
+    //Load background music
 
 		var listener = new THREE.AudioListener();
 		camera.add( listener );
@@ -154,14 +158,19 @@ function init() {
 			line.userData.originalScale = p[ 0 ];
 			line.rotation.y = Math.random() * Math.PI;
 			line.updateMatrix();
+			// Add mesh to scene
 			scene.add( line );
 
 		}
-
+//Configure renderer settings-------------------------------------------------
+    // Create a renderer with Antialiasing ------------
 		renderer = new THREE.WebGLRenderer( { antialias: true } );
+		// Configure renderer clear color
 		renderer.setClearColor('rgb(2,6,28)',1.0);
 		renderer.setPixelRatio( window.devicePixelRatio );
+		// Configure renderer size
 		renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+		  // Append Renderer to DOM
 		document.body.appendChild( renderer.domElement );
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		document.addEventListener( 'touchstart', onDocumentTouchStart, false );
@@ -170,6 +179,7 @@ function init() {
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
+    // test geometry swapability
 
 		setInterval( function () {
 
@@ -189,7 +199,7 @@ function init() {
 		}, 3000 );
 
 	}
-
+// Create a Mesh with basic material ---------
 	function createGeometry() {
 
 		var geometry = new THREE.BufferGeometry();
@@ -260,8 +270,7 @@ function init() {
 
 	}
 
-	//
-
+	// Render Loop
 	function animate() {
 
 		requestAnimationFrame( animate );
@@ -274,7 +283,7 @@ function init() {
 
 		camera.position.y += ( - mouseY + 200 - camera.position.y ) * .05;
 		camera.lookAt( scene.position );
-
+    // Render the scene
 		renderer.autoClear = false;
 		renderer.clear();
 		renderer.render(backgroundScene , backgroundCamera );
