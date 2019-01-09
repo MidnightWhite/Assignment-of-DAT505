@@ -11,15 +11,6 @@
 		<script src="build/three.js"></script>
 		<script src="js/WebGL.js"></script>
 		<script src="js/stats.min.js"></script>
-		<script src="js/OrbitControls.js"></script>
-		<script src="js/postprocessing/EffectComposer.js"></script>
-		<script src="js/postprocessing/RenderPass.js"></script>
-		<script src="js/postprocessing/MaskPass.js"></script>
-		<script src="js/postprocessing/ShaderPass.js"></script>
-		<script src="js/postprocessing/GlitchPass.js"></script>
-		<script src="js/ShaderGodRays.js"></script>
-		<script src="js/shaders/CopyShader.js"></script>
-		<script src="js/shaders/DigitalGlitch.js"></script>
 
 		<script src="js/DDSLoader.js"></script>
 		<script src="js/OBJLoader.js"></script>
@@ -29,8 +20,6 @@
 
 </body>
 </html>
-
-//
 
 <script>
 
@@ -211,7 +200,7 @@ function init() {
 
 			vertices.push( vertex.x, vertex.y, vertex.z );
 
-			vertex.multiplyScalar( Math.random() * 0.01 + 1 );
+			vertex.multiplyScalar( Math.random() * 0.03 + 1 );
 
 			vertices.push( vertex.x, vertex.y, vertex.z );
 
